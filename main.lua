@@ -15,7 +15,7 @@ local info = {
     "by pressing on empty button",
     "Alt clears text in active entry",
     "Author: Max Pan",
-    "Version: 1.1.0"
+    "Version: 1.1.1"
 }
 
 local mouseX = 0
