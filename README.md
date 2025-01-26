@@ -1,7 +1,7 @@
 # Tasker
 A simple desktop application for managing ideas, tasks and memos.
 
-Current version: 1.1.0
+Current version: 1.1.1
 
 It was written entirely on Lua with Love 2d engine.
 No other libraries were used.
