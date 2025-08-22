@@ -35,6 +35,15 @@ local infoButton = Button("i", function(dialog)
 	infoDialog.active = not dialog.active
 end, infoDialog, 775, 55, 20, 20, { 0.2, 0.2, 0.8 }, { 1, 1, 1 }, "fill", { 0.6, 0.6, 1 }, { 0, 0, 0 })
 
+local hostButton = Button("H", function(dialog)
+	infoDialog.active = not dialog.active
+end, infoDialog, 775, 80, 20, 20, { 0.2, 0.2, 0.8 }, { 1, 1, 1 }, "fill", { 0.6, 0.6, 1 }, { 0, 0, 0 })
+local joinButton = Button("j", function(dialog)
+	infoDialog.active = not dialog.active
+end, infoDialog, 775, 105, 20, 20, { 0.2, 0.2, 0.8 }, { 1, 1, 1 }, "fill", { 0.6, 0.6, 1 }, { 0, 0, 0 })
+local disconnectButton = Button("D", function(dialog)
+	infoDialog.active = not dialog.active
+end, infoDialog, 775, 130, 20, 20, { 0.2, 0.2, 0.8 }, { 1, 1, 1 }, "fill", { 0.6, 0.6, 1 }, { 0, 0, 0 })
 function love.load()
 	local bgColor = {}
 
@@ -89,10 +98,32 @@ end
 function love.draw()
 	taskList:draw(mouseX, mouseY)
 	createNewTaskButton:draw(nil, nil, mouseX, mouseY, 5, 1.5)
+	if createNewTaskButton.colorCurrent == createNewTaskButton.colorHighlighted then
+		love.graphics.print("create", createNewTaskButton.x - 45, createNewTaskButton.y + 3)
+	end
 	saveTaskListButton:draw(nil, nil, mouseX, mouseY, 6, 3)
-	infoButton:draw(nil, nil, mouseX, mouseY, 8, 3)
+	if saveTaskListButton.colorCurrent == saveTaskListButton.colorHighlighted then
+		love.graphics.print("save", saveTaskListButton.x - 35, saveTaskListButton.y + 3)
+	end
+	infoButton:draw(nil, nil, mouseX, mouseY, 9, 3)
+	if infoButton.colorCurrent == infoButton.colorHighlighted then
+		love.graphics.print("info", infoButton.x - 30, infoButton.y + 3)
+	end
+	hostButton:draw(nil, nil, mouseX, mouseY, 6, 3)
+	if hostButton.colorCurrent == hostButton.colorHighlighted then
+		love.graphics.print("host", hostButton.x - 32, hostButton.y + 3)
+	end
+	joinButton:draw(nil, nil, mouseX, mouseY, 9, 3)
+	if joinButton.colorCurrent == joinButton.colorHighlighted then
+		love.graphics.print("join", joinButton.x - 30, joinButton.y + 3)
+	end
+	disconnectButton:draw(nil, nil, mouseX, mouseY, 6, 3)
+	if disconnectButton.colorCurrent == disconnectButton.colorHighlighted then
+		love.graphics.print("disconnect", disconnectButton.x - 72, disconnectButton.y + 3)
+	end
 
 	newtaskDialog:draw(mouseX, mouseY)
+	infoDialog:draw(mouseX, mouseY)
 	infoDialog:draw(mouseX, mouseY)
 	taskList.editDialog:draw(mouseX, mouseY)
 end
