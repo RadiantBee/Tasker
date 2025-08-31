@@ -14,7 +14,10 @@ local function button(
 	modeHighlighted,
 	colorActive,
 	colorTextActive,
-	modeActive
+	modeActive,
+	descText,
+	descTextX,
+	descTextY
 )
 	return {
 		text = text or "Empty",
@@ -47,6 +50,11 @@ local function button(
 		colorTextActive = colorTextActive or { 0, 0, 0 },
 		modeActive = modeActive or "fill",
 
+		descText = descText,
+
+		descTextX = descTextX or 0,
+		descTextY = descTextY or 0,
+
 		activate = function(self)
 			if self.funcArgs then
 				self.func(self.funcArgs)
@@ -56,9 +64,11 @@ local function button(
 		end,
 
 		checkHighlighted = function(self, mouseX, mouseY)
-			if (mouseX > self.x) and (mouseX < self.x + self.width) then
-				if (mouseY > self.y) and (mouseY < self.y + self.height) then
-					return true
+			if mouseX and mouseY then
+				if (mouseX > self.x) and (mouseX < self.x + self.width) then
+					if (mouseY > self.y) and (mouseY < self.y + self.height) then
+						return true
+					end
 				end
 			end
 			return false
@@ -93,6 +103,10 @@ local function button(
 				self.colorTextCurrent = self.colorTextIdle
 				self.modeCurrent = self.modeIdle
 			else
+				if self.descText then
+					love.graphics.print(self.descText, self.x + self.descTextX, self.y + self.descTextY)
+				end
+
 				if not love.mouse.isDown(1) then
 					self.colorCurrent = self.colorHighlighted
 					self.colorTextCurrent = self.colorTextHighlighted
@@ -116,4 +130,3 @@ local function button(
 end
 
 return button
-

@@ -18,8 +18,8 @@ local function Task(argTable, taskList)
 	task.description4 = argTable[5] or ""
 	task.type = argTable[6] or "noType"
 
-	task.x = tonumber(argTable[7]) or 0
-	task.y = tonumber(argTable[8]) or 0
+	task.x = tonumber(argTable[7]) or 100
+	task.y = tonumber(argTable[8]) or 100
 
 	task.active = argTable[9] == "1"
 	task.typeColorId = tonumber(argTable[10]) or 1
@@ -213,12 +213,14 @@ end
 local function TaskList()
 	local taskList = {}
 
+	taskList.currentSave = 1
+
 	taskList.tasks = {}
 
 	taskList.editDialog = CreateDialogEditTask(100, 100, nil, nil, nil, taskList)
 
 	taskList.loadFromFile = function(self, file)
-		local taskFile = io.open(file or "save.txt", "r")
+		local taskFile = io.open(file or "save1", "r")
 		if not taskFile then
 			error("Cannot acces the save file")
 		end
@@ -229,7 +231,7 @@ local function TaskList()
 	end
 
 	taskList.saveToFile = function(self, file)
-		local taskFile = io.open(file or "save.txt", "w")
+		local taskFile = io.open(file or "save1", "w")
 		if not taskFile then
 			error("Cannot acces the save file")
 		end
