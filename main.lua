@@ -106,7 +106,7 @@ local hostButton = Button(
 	end,
 	infoDialog,
 	775,
-	80,
+	105,
 	20,
 	20,
 	{ 0.2, 0.2, 0.8 },
@@ -129,7 +129,7 @@ local joinButton = Button(
 	end,
 	infoDialog,
 	775,
-	105,
+	130,
 	20,
 	20,
 	{ 0.2, 0.2, 0.8 },
@@ -152,7 +152,7 @@ local disconnectButton = Button(
 	end,
 	infoDialog,
 	775,
-	130,
+	155,
 	20,
 	20,
 	{ 0.2, 0.2, 0.8 },
@@ -169,6 +169,144 @@ local disconnectButton = Button(
 	3
 )
 
+local save1Button = Button(
+	"1",
+	function(dialog)
+		dialog.active = not dialog.active
+	end,
+	infoDialog,
+	775,
+	205,
+	20,
+	20,
+	{ 0.2, 0.2, 0.8 },
+	{ 1, 1, 1 },
+	"fill",
+	{ 0.6, 0.6, 1 },
+	{ 0, 0, 0 },
+	nil,
+	nil,
+	nil,
+	nil,
+	"Save 1",
+	-45,
+	3
+)
+local save2Button = Button(
+	"2",
+	function(dialog)
+		dialog.active = not dialog.active
+	end,
+	infoDialog,
+	775,
+	230,
+	20,
+	20,
+	{ 0.2, 0.2, 0.8 },
+	{ 1, 1, 1 },
+	"fill",
+	{ 0.6, 0.6, 1 },
+	{ 0, 0, 0 },
+	nil,
+	nil,
+	nil,
+	nil,
+	"Save 2",
+	-45,
+	3
+)
+local save3Button = Button(
+	"3",
+	function(dialog)
+		dialog.active = not dialog.active
+	end,
+	infoDialog,
+	775,
+	255,
+	20,
+	20,
+	{ 0.2, 0.2, 0.8 },
+	{ 1, 1, 1 },
+	"fill",
+	{ 0.6, 0.6, 1 },
+	{ 0, 0, 0 },
+	nil,
+	nil,
+	nil,
+	nil,
+	"Save 3",
+	-45,
+	3
+)
+local save4Button = Button(
+	"4",
+	function(dialog)
+		dialog.active = not dialog.active
+	end,
+	infoDialog,
+	775,
+	280,
+	20,
+	20,
+	{ 0.2, 0.2, 0.8 },
+	{ 1, 1, 1 },
+	"fill",
+	{ 0.6, 0.6, 1 },
+	{ 0, 0, 0 },
+	nil,
+	nil,
+	nil,
+	nil,
+	"Save 4",
+	-45,
+	3
+)
+local save5Button = Button(
+	"5",
+	function(dialog)
+		dialog.active = not dialog.active
+	end,
+	infoDialog,
+	775,
+	305,
+	20,
+	20,
+	{ 0.2, 0.2, 0.8 },
+	{ 1, 1, 1 },
+	"fill",
+	{ 0.6, 0.6, 1 },
+	{ 0, 0, 0 },
+	nil,
+	nil,
+	nil,
+	nil,
+	"Save 5",
+	-45,
+	3
+)
+local save6Button = Button(
+	"6",
+	function(dialog)
+		dialog.active = not dialog.active
+	end,
+	infoDialog,
+	775,
+	330,
+	20,
+	20,
+	{ 0.2, 0.2, 0.8 },
+	{ 1, 1, 1 },
+	"fill",
+	{ 0.6, 0.6, 1 },
+	{ 0, 0, 0 },
+	nil,
+	nil,
+	nil,
+	nil,
+	"Save 6",
+	-45,
+	3
+)
 local clearButton = Button(
 	"c",
 	function(dialog)
@@ -176,7 +314,7 @@ local clearButton = Button(
 	end,
 	infoDialog,
 	775,
-	530,
+	380,
 	20,
 	20,
 	{ 0.2, 0.2, 0.8 },
@@ -275,6 +413,12 @@ function love.draw()
 	joinButton:draw(nil, nil, user.mouse.x, user.mouse.y, 9, 3)
 	disconnectButton:draw(nil, nil, user.mouse.x, user.mouse.y, 6, 3)
 	clearButton:draw(nil, nil, user.mouse.x, user.mouse.y, 7, 2)
+	save1Button:draw(nil, nil, user.mouse.x, user.mouse.y, 7, 2)
+	save2Button:draw(nil, nil, user.mouse.x, user.mouse.y, 7, 2)
+	save3Button:draw(nil, nil, user.mouse.x, user.mouse.y, 7, 2)
+	save4Button:draw(nil, nil, user.mouse.x, user.mouse.y, 7, 2)
+	save5Button:draw(nil, nil, user.mouse.x, user.mouse.y, 7, 2)
+	save6Button:draw(nil, nil, user.mouse.x, user.mouse.y, 7, 2)
 
 	-- Pop-up windows
 	newtaskDialog:draw(user.mouse.x, user.mouse.y)
