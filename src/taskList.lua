@@ -130,22 +130,26 @@ local function Task(argTable, taskList)
 	end
 
 	task.checkHighlighted = function(self, mouseX, mouseY)
-		if (mouseX > self.x) and (mouseX < self.x + self.width) then
-			if (mouseY > self.y) and (mouseY < self.y + self.height) then
-				return true
+		if mouseX and mouseY then
+			if (mouseX > self.x) and (mouseX < self.x + self.width) then
+				if (mouseY > self.y) and (mouseY < self.y + self.height) then
+					return true
+				end
 			end
 		end
 		return false
 	end
 
 	task.checkMouseMove = function(self, mouseX, mouseY, mouseState)
-		if (mouseX > self.x) and (mouseX < self.x + self.width - self.activeButton.width) then
-			if (mouseY > self.y) and (mouseY < self.y + self.titleHeight) then
-				if mouseState == 1 then
-					self.x = mouseX - self.width / 2
-					self.y = mouseY - self.titleHeight / 2
-					self.readyToDelete = false
-					self:deleteButtonColor()
+		if mouseX and mouseY then
+			if (mouseX > self.x) and (mouseX < self.x + self.width - self.activeButton.width) then
+				if (mouseY > self.y) and (mouseY < self.y + self.titleHeight) then
+					if mouseState == 1 then
+						self.x = mouseX - self.width / 2
+						self.y = mouseY - self.titleHeight / 2
+						self.readyToDelete = false
+						self:deleteButtonColor()
+					end
 				end
 			end
 		end

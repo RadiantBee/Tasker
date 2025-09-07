@@ -24,10 +24,12 @@ local function entry(x, y, width, height, onEnterFunc, onEnterFuncArgs)
 		colorCurrent = { 0, 0, 0 },
 
 		onClick = function(self, mouseX, mouseY)
-			if (mouseX > self.x) and (mouseX < self.x + self.width) then
-				if (mouseY > self.y) and (mouseY < self.y + self.height) then
-					self.active = not self.active
-					return
+			if mouseX and mouseY then
+				if (mouseX > self.x) and (mouseX < self.x + self.width) then
+					if (mouseY > self.y) and (mouseY < self.y + self.height) then
+						self.active = not self.active
+						return
+					end
 				end
 			end
 			self.active = false

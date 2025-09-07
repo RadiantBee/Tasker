@@ -75,9 +75,11 @@ local function button(
 		end,
 
 		onClick = function(self, mouseX, mouseY)
-			if (mouseX >= self.x) and (mouseX <= self.x + self.width) then
-				if (mouseY >= self.y) and (mouseY <= self.y + self.height) then
-					self:activate()
+			if mouseX and mouseY then
+				if (mouseX >= self.x) and (mouseX <= self.x + self.width) then
+					if (mouseY >= self.y) and (mouseY <= self.y + self.height) then
+						self:activate()
+					end
 				end
 			end
 		end,

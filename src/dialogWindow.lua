@@ -27,7 +27,7 @@ function EmptyDiaolgWindow(x, y, width, height)
 	end
 
 	emptyDiaolgWindow.checkMouseMove = function(self, mouseX, mouseY, mouseState)
-		if self.active then
+		if self.active and mouseX and mouseY then
 			if (mouseX > self.x) and (mouseX < self.x + self.width - self.exitButton.width) then
 				if (mouseY > self.y) and (mouseY < self.y + self.titleHeight) then
 					if mouseState == 1 then
