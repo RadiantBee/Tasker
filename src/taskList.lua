@@ -119,9 +119,11 @@ local function Task(argTable, taskList)
 	end, { task, taskList }, nil, nil, 20, 20)
 
 	task.checkHighlightedTitle = function(self, mouseX, mouseY)
-		if (mouseX > self.x) and (mouseX < self.x + self.width) then
-			if (mouseY > self.y) and (mouseY < self.y + self.titleHeight) then
-				return true
+		if mouseX and mouseY then
+			if (mouseX > self.x) and (mouseX < self.x + self.width) then
+				if (mouseY > self.y) and (mouseY < self.y + self.titleHeight) then
+					return true
+				end
 			end
 		end
 		return false
