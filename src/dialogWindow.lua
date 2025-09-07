@@ -205,3 +205,130 @@ function CreateDialogEditTask(x, y, width, height, task, taskList)
 	end
 	return editDialog
 end
+
+function CreateJoinWindow(x, y, width, height, taskList)
+	local joinWindow = EmptyDiaolgWindow(x, y, width, height)
+	joinWindow.height = height or 100
+	joinWindow.title = "Join server"
+
+	joinWindow.joinButton = Button("Join", function(args)
+		-- TODO: join functionality
+	end, { joinWindow, taskList }, nil, nil, 50, 20)
+
+	joinWindow.entryPort = entry(nil, nil, nil, nil, function(dialog)
+		dialog.entryPort.active = false
+	end, joinWindow)
+
+	joinWindow.entryIp = entry(nil, nil, nil, nil, function(dialog)
+		dialog.entryPort.active = true
+		dialog.entryIp.active = false
+	end, joinWindow)
+
+	joinWindow.entryClear = function(self)
+		self.entryIp.text = ""
+		self.entryPort.text = ""
+	end
+
+	joinWindow.exitButton.func = function(self)
+		self:entryClear()
+		self.active = false
+	end
+
+	joinWindow.onClick = function(self, mouseX, mouseY)
+		if self.active then
+			self.exitButton:onClick(mouseX, mouseY)
+			self.joinButton:onClick(mouseX, mouseY)
+
+			self.entryIp:onClick(mouseX, mouseY)
+			self.entryPort:onClick(mouseX, mouseY)
+		end
+	end
+
+	joinWindow.onKeyboardPress = function(self, key)
+		if self.active then
+			self.entryPort:onKeyboardPress(key)
+			self.entryIp:onKeyboardPress(key)
+		end
+	end
+
+	joinWindow.draw = function(self, mouseX, mouseY)
+		self:bodyDraw(mouseX, mouseY)
+		if self.active then
+			love.graphics.print("Enter ip:", self.x + 10, self.y + self.titleHeight + 12)
+			love.graphics.print("Enter port:", self.x + 10, self.y + self.titleHeight + 37)
+
+			self.entryIp:draw(self.x + 90, self.y + self.titleHeight + 10, 2, 2)
+			self.entryPort:draw(self.x + 90, self.y + self.titleHeight + 35, 2, 2)
+
+			self.joinButton:draw(
+				self.x + self.width / 2 - self.joinButton.width / 2,
+				self.y + self.height + self.titleHeight - self.joinButton.height - 10,
+				mouseX,
+				mouseY,
+				13,
+				3
+			)
+		end
+	end
+
+	return joinWindow
+end
+
+function CreateHostWindow(x, y, width, height, taskList)
+	local hostWindow = EmptyDiaolgWindow(x, y, width, height)
+	hostWindow.height = height or 100
+	hostWindow.title = "Host server"
+
+	hostWindow.hostButton = Button("Host", function(args)
+		-- TODO: host functionality
+	end, { hostWindow, taskList }, nil, nil, 50, 20)
+
+	hostWindow.entryPort = entry(nil, nil, nil, nil, function(dialog)
+		dialog.entryPort.active = false
+	end, hostWindow)
+
+	hostWindow.entryClear = function(self)
+		self.entryPort.text = ""
+	end
+
+	hostWindow.exitButton.func = function(self)
+		self:entryClear()
+		self.active = false
+	end
+
+	hostWindow.onClick = function(self, mouseX, mouseY)
+		if self.active then
+			self.exitButton:onClick(mouseX, mouseY)
+			self.hostButton:onClick(mouseX, mouseY)
+
+			self.entryPort:onClick(mouseX, mouseY)
+		end
+	end
+
+	hostWindow.onKeyboardPress = function(self, key)
+		if self.active then
+			self.entryPort:onKeyboardPress(key)
+		end
+	end
+
+	hostWindow.draw = function(self, mouseX, mouseY)
+		self:bodyDraw(mouseX, mouseY)
+		if self.active then
+			love.graphics.print("Enter port:", self.x + 10, self.y + self.titleHeight + 12)
+
+			love.graphics.print("You will host your current save!", self.x + 7, self.y + self.titleHeight + 43)
+			self.entryPort:draw(self.x + 90, self.y + self.titleHeight + 10, 2, 2)
+
+			self.hostButton:draw(
+				self.x + self.width / 2 - self.hostButton.width / 2,
+				self.y + self.height + self.titleHeight - self.hostButton.height - 10,
+				mouseX,
+				mouseY,
+				10,
+				3
+			)
+		end
+	end
+
+	return hostWindow
+end
