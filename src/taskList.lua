@@ -82,6 +82,7 @@ local function Task(argTable, taskList)
 	task.deleteButton = Button("X", function(argTable)
 		if argTable[2].readyToDelete then
 			for id, task in pairs(argTable[1].tasks) do
+				-- BUG: It's still a bad way to detele files
 				if
 					task.title == argTable[2].title
 					and task.description1 == argTable[2].description1
@@ -91,6 +92,7 @@ local function Task(argTable, taskList)
 					and task.type == argTable[2].type
 				then
 					table.remove(argTable[1].tasks, id)
+					collectgarbage()
 					argTable[1]:saveToFile()
 					break
 				end
@@ -266,6 +268,15 @@ local function TaskList()
 			)
 		end
 		taskFile:close()
+	end
+
+	taskList.clearSaveFile = function(file)
+		io.open(file or "save1", "w"):close()
+	end
+
+	taskList.clearAllTasks = function(self)
+		self.tasks = {}
+		collectgarbage()
 	end
 
 	taskList.onClick = function(self, mouseX, mouseY)

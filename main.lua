@@ -29,6 +29,8 @@ local newtaskDialog = CreateDialogWindowNewTask(400, 20, nil, nil, taskList)
 local infoDialog = CreateInfoWindow(100, 20, 260, info)
 local joinDialog = CreateJoinWindow(400, 250, nil, nil, taskList)
 local hostDialog = CreateHostWindow(150, 180, nil, nil, taskList)
+
+local clearSaveDialog = CreateClearSaveWindow(500, 350, nil, nil, taskList)
 -- UI Buttons
 local createNewTaskButton = Button(
 	"+",
@@ -311,9 +313,9 @@ local tempSaveButton = Button(
 local clearButton = Button(
 	"c",
 	function(dialog)
-		infoDialog.active = not dialog.active
+		dialog.active = not dialog.active
 	end,
-	infoDialog,
+	clearSaveDialog,
 	775,
 	380,
 	20,
@@ -375,6 +377,7 @@ function love.update()
 	infoDialog:checkMouseMove(user.mouse.x, user.mouse.y, user.mouse.state)
 	joinDialog:checkMouseMove(user.mouse.x, user.mouse.y, user.mouse.state)
 	hostDialog:checkMouseMove(user.mouse.x, user.mouse.y, user.mouse.state)
+	clearSaveDialog:checkMouseMove(user.mouse.x, user.mouse.y, user.mouse.state)
 	taskList.editDialog:checkMouseMove(user.mouse.x, user.mouse.y, user.mouse.state)
 end
 
@@ -399,6 +402,7 @@ function love.mousepressed()
 	infoDialog:onClick(user.mouse.x, user.mouse.y)
 	joinDialog:onClick(user.mouse.x, user.mouse.y)
 	hostDialog:onClick(user.mouse.x, user.mouse.y)
+	clearSaveDialog:onClick(user.mouse.x, user.mouse.y)
 	taskList.editDialog:onClick(user.mouse.x, user.mouse.y)
 end
 
@@ -444,6 +448,7 @@ function love.draw()
 	joinDialog:draw(user.mouse.x, user.mouse.y)
 	hostDialog:draw(user.mouse.x, user.mouse.y)
 
+	clearSaveDialog:draw(user.mouse.x, user.mouse.y)
 	taskList.editDialog:draw(user.mouse.x, user.mouse.y)
 
 	push:finish()

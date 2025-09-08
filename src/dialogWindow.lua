@@ -332,3 +332,72 @@ function CreateHostWindow(x, y, width, height, taskList)
 
 	return hostWindow
 end
+
+function CreateClearSaveWindow(x, y, width, height, taskList)
+	local clearSaveWindow = EmptyDiaolgWindow(x, y, width, height)
+	clearSaveWindow.height = height or 80
+	clearSaveWindow.title = "Clear save"
+
+	clearSaveWindow.readyToClear = false
+
+	clearSaveWindow.clearButtonColor = function(self)
+		if self.readyToClear then
+			self.clearButton.modeIdle = "fill"
+			self.clearButton.colorIdle = { 0.4, 0, 0 }
+			self.clearButton.colorHighlighted = { 0.7, 0, 0 }
+			self.clearButton.colorActive = { 1, 0, 0 }
+		else
+			self.clearButton.modeIdle = "line"
+			self.clearButton.colorIdle = { 1, 1, 1 }
+			self.clearButton.colorHighlighted = { 0.4, 0.4, 0.4 }
+			self.clearButton.colorActive = { 1, 1, 1 }
+		end
+	end
+	clearSaveWindow.clearButton = Button("Clear", function(args)
+		if args[1].readyToClear then
+			args[1].active = false
+			args[1].readyToClear = false
+			args[2].clearSaveFile()
+			args[2]:clearAllTasks()
+			args[1]:clearButtonColor()
+		else
+			args[1].readyToClear = true
+			args[1]:clearButtonColor()
+		end
+	end, { clearSaveWindow, taskList }, nil, nil, 50, 20)
+
+	clearSaveWindow.exitButton.func = function(self)
+		self.active = false
+		self.readyToClear = false
+		self:clearButtonColor()
+	end
+
+	clearSaveWindow.onClick = function(self, mouseX, mouseY)
+		if self.active then
+			self.exitButton:onClick(mouseX, mouseY)
+			self.clearButton:onClick(mouseX, mouseY)
+		end
+	end
+
+	clearSaveWindow.draw = function(self, mouseX, mouseY)
+		self:bodyDraw(mouseX, mouseY)
+		if self.active then
+			love.graphics.print(
+				"Do you want to clear all\nsave data from current save?",
+				self.x + 10,
+				self.y + self.titleHeight + 12
+			)
+
+			self.clearButton:draw(
+				self.x + self.width / 2 - self.clearButton.width / 2,
+				self.y + self.height + self.titleHeight - self.clearButton.height - 10,
+				mouseX,
+				mouseY,
+				10,
+				3
+			)
+		end
+	end
+
+	return clearSaveWindow
+end
