@@ -385,7 +385,7 @@ function love.load()
 
 	local colorFile = io.open("config", "r")
 	if not colorFile then
-		error("Cannot acces the colorConfig file")
+		error("Cannot acces the config file")
 	end
 	for line in colorFile:lines("l") do
 		table.insert(configData, line)
