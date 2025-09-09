@@ -206,7 +206,7 @@ function CreateDialogEditTask(x, y, width, height, task, taskList)
 	end
 	return editDialog
 end
-
+--[[
 function CreateJoinWindow(x, y, width, height, taskList)
 	local joinWindow = EmptyDiaolgWindow(x, y, width, height)
 	joinWindow.height = height or 100
@@ -333,7 +333,7 @@ function CreateHostWindow(x, y, width, height, taskList)
 
 	return hostWindow
 end
-
+--]]
 function CreateClearSaveWindow(x, y, width, height, taskList)
 	local clearSaveWindow = EmptyDiaolgWindow(x, y, width, height)
 	clearSaveWindow.height = height or 80
