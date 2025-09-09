@@ -117,7 +117,7 @@ local function Task(argTable, taskList)
 		args[2].editDialog.entryDescription2.text = args[1].description2
 		args[2].editDialog.entryDescription3.text = args[1].description3
 		args[2].editDialog.entryDescription4.text = args[1].description4
-		args[2].editDialog.active = not args[2].editDialog.active
+		args[2].editDialog.active = true
 	end, { task, taskList }, nil, nil, 20, 20)
 
 	task.checkHighlightedTitle = function(self, mouseX, mouseY)
@@ -228,7 +228,7 @@ local function TaskList()
 	taskList.editDialog = CreateDialogEditTask(100, 100, nil, nil, nil, taskList)
 
 	taskList.loadFromFile = function(self, file)
-		local taskFile = io.open(file or "save1", "r")
+		local taskFile = io.open(file or ("save" .. self.currentSave), "r")
 		if not taskFile then
 			error("Cannot acces the save file")
 		end
@@ -239,7 +239,7 @@ local function TaskList()
 	end
 
 	taskList.saveToFile = function(self, file)
-		local taskFile = io.open(file or "save1", "w")
+		local taskFile = io.open(file or ("save" .. self.currentSave), "w")
 		if not taskFile then
 			error("Cannot acces the save file")
 		end
@@ -270,8 +270,8 @@ local function TaskList()
 		taskFile:close()
 	end
 
-	taskList.clearSaveFile = function(file)
-		io.open(file or "save1", "w"):close()
+	taskList.clearSaveFile = function(self, file)
+		io.open(file or ("save" .. self.currentSave), "w"):close()
 	end
 
 	taskList.clearAllTasks = function(self)
@@ -297,6 +297,15 @@ local function TaskList()
 	taskList.draw = function(self, mouseX, mouseY)
 		for _, task in pairs(self.tasks) do
 			task:draw(mouseX, mouseY)
+		end
+	end
+
+	taskList.changeSaveFile = function(self, newSaveNumber)
+		if self.currentSave ~= newSaveNumber then
+			self:saveToFile()
+			self:clearAllTasks()
+			self.currentSave = newSaveNumber
+			self:loadFromFile()
 		end
 	end
 

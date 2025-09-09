@@ -32,6 +32,28 @@ local hostDialog = CreateHostWindow(150, 180, nil, nil, taskList)
 
 local clearSaveDialog = CreateClearSaveWindow(500, 350, nil, nil, taskList)
 -- UI Buttons
+local saveButtonList = {}
+saveButtonList.idlePassiveSaveColor = { 0.2, 0.2, 0.8 }
+saveButtonList.idlePassiveSaveTextColor = { 1, 1, 1 }
+saveButtonList.highlightedPassiveSaveColor = { 0.6, 0.6, 1 }
+saveButtonList.idleActiveSaveColor = { 1, 1, 0.2 }
+saveButtonList.idleActiveSaveTextColor = { 0, 0, 0 }
+saveButtonList.highlightedActiveSaveColor = { 1, 1, 0.8 }
+
+saveButtonList.updateColors = function(self, activeSave)
+	for index, saveButton in ipairs(self) do
+		if index == activeSave then
+			saveButton.colorIdle = self.idleActiveSaveColor
+			saveButton.colorTextIdle = self.idleActiveSaveTextColor
+			saveButton.colorHighlighted = self.highlightedActiveSaveColor
+		else
+			saveButton.colorIdle = self.idlePassiveSaveColor
+			saveButton.colorTextIdle = self.idlePassiveSaveTextColor
+			saveButton.colorHighlighted = self.highlightedPassiveSaveColor
+		end
+	end
+end
+
 local createNewTaskButton = Button(
 	"+",
 	function(dialog)
@@ -174,18 +196,19 @@ local disconnectButton = Button(
 
 local save1Button = Button(
 	"1",
-	function(dialog)
-		dialog.active = not dialog.active
+	function(args)
+		args[1]:changeSaveFile(1)
+		args[2]:updateColors(args[1].currentSave)
 	end,
-	infoDialog,
+	{ taskList, saveButtonList },
 	775,
 	205,
 	20,
 	20,
-	{ 0.2, 0.2, 0.8 },
-	{ 1, 1, 1 },
+	{ 1, 1, 0.2 },
+	{ 0, 0, 0 },
 	"fill",
-	{ 0.6, 0.6, 1 },
+	{ 1, 1, 0.8 },
 	{ 0, 0, 0 },
 	nil,
 	nil,
@@ -197,10 +220,11 @@ local save1Button = Button(
 )
 local save2Button = Button(
 	"2",
-	function(dialog)
-		dialog.active = not dialog.active
+	function(args)
+		args[1]:changeSaveFile(2)
+		args[2]:updateColors(args[1].currentSave)
 	end,
-	infoDialog,
+	{ taskList, saveButtonList },
 	775,
 	230,
 	20,
@@ -220,10 +244,11 @@ local save2Button = Button(
 )
 local save3Button = Button(
 	"3",
-	function(dialog)
-		dialog.active = not dialog.active
+	function(args)
+		args[1]:changeSaveFile(3)
+		args[2]:updateColors(args[1].currentSave)
 	end,
-	infoDialog,
+	{ taskList, saveButtonList },
 	775,
 	255,
 	20,
@@ -243,10 +268,11 @@ local save3Button = Button(
 )
 local save4Button = Button(
 	"4",
-	function(dialog)
-		dialog.active = not dialog.active
+	function(args)
+		args[1]:changeSaveFile(4)
+		args[2]:updateColors(args[1].currentSave)
 	end,
-	infoDialog,
+	{ taskList, saveButtonList },
 	775,
 	280,
 	20,
@@ -266,10 +292,11 @@ local save4Button = Button(
 )
 local save5Button = Button(
 	"5",
-	function(dialog)
-		dialog.active = not dialog.active
+	function(args)
+		args[1]:changeSaveFile(5)
+		args[2]:updateColors(args[1].currentSave)
 	end,
-	infoDialog,
+	{ taskList, saveButtonList },
 	775,
 	305,
 	20,
@@ -289,10 +316,11 @@ local save5Button = Button(
 )
 local tempSaveButton = Button(
 	"t",
-	function(dialog)
-		dialog.active = not dialog.active
+	function(args)
+		args[1]:changeSaveFile(6)
+		args[2]:updateColors(args[1].currentSave)
 	end,
-	infoDialog,
+	{ taskList, saveButtonList },
 	775,
 	330,
 	20,
@@ -333,6 +361,12 @@ local clearButton = Button(
 	-70,
 	3
 )
+saveButtonList[1] = save1Button
+saveButtonList[2] = save2Button
+saveButtonList[3] = save3Button
+saveButtonList[4] = save4Button
+saveButtonList[5] = save5Button
+saveButtonList[6] = tempSaveButton
 
 local configData = {}
 --[[

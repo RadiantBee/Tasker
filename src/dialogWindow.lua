@@ -202,6 +202,7 @@ function CreateDialogEditTask(x, y, width, height, task, taskList)
 		args[1].task.description4 = args[1].entryDescription4.text
 		args[1].task.type = args[1].entryType.text
 		args[2]:saveToFile()
+		args[1].active = false
 	end
 	return editDialog
 end
@@ -357,7 +358,7 @@ function CreateClearSaveWindow(x, y, width, height, taskList)
 		if args[1].readyToClear then
 			args[1].active = false
 			args[1].readyToClear = false
-			args[2].clearSaveFile()
+			args[2]:clearSaveFile()
 			args[2]:clearAllTasks()
 			args[1]:clearButtonColor()
 		else
