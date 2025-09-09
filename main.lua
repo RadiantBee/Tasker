@@ -12,11 +12,11 @@ local taskList = TaskList()
 local info = {
 	"Tasker is an interactive To Do app",
 	"You can write down your ideas and tasks",
-	"You can change color of your type",
+	"You can change color of task type",
 	"by pressing on empty button",
 	"Alt clears text in active entry",
 	"Author: Max Pan",
-	"Version: 1.1.1",
+	"Version: 1.2.0",
 }
 
 local user = {}
